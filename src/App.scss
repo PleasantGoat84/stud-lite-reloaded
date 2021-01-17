@@ -24,11 +24,12 @@ h6 {
 .App {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 
   overflow-x: hidden;
 
   main {
+    @include flex-center;
     flex: 1;
     background: $light;
   }
@@ -72,6 +73,8 @@ button {
 
     box-shadow: none;
     border: 1px solid $secondary;
+
+    font-size: 1rem;
   }
 }
 
