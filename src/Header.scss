@@ -1,0 +1,38 @@
+@import "utils/variables";
+@import "utils/mixins";
+
+header {
+  @include flex-center;
+
+  width: 100vw;
+
+  background: $primary;
+
+  color: $accent;
+
+  z-index: 100;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
+
+    box-shadow: 0 0 0.8rem $accent;
+
+    z-index: 90;
+  }
+
+  padding: 0.7rem 0;
+
+  #icon {
+    width: 2.5em;
+    margin-right: 0.5em;
+  }
+
+  h1 {
+    margin: 0;
+  }
+}

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import loadable from "@loadable/component";
 
-import "./App.css";
+import "./App.scss";
 import Header from "./Header";
 
 // Routes
@@ -19,7 +19,6 @@ const App = () => {
             </Route>
           </Switch>
         </main>
-        <footer></footer>
       </div>
     </Router>
   );

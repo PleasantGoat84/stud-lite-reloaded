@@ -1,0 +1,108 @@
+@import "utils/variables";
+@import "utils/mixins";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Yusei Magic", sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  overflow-x: hidden;
+
+  main {
+    flex: 1;
+    background: $light;
+  }
+}
+
+.btn-icon {
+  width: 1.25em;
+  margin-right: 0.5em;
+}
+
+button {
+  @include flex-center;
+
+  font-family: "Noto Sans JP", sans-serif;
+
+  background: $accent;
+  color: white;
+
+  border-radius: 0.4rem;
+  font-size: 1.25rem;
+
+  height: 3.25rem;
+
+  border: 0;
+
+  cursor: pointer;
+
+  $transition-time: 0.3s;
+  transition: color $transition-time, background-color $transition-time;
+
+  box-shadow: 0 0.1rem 0.2rem $secondary;
+
+  &:hover {
+    background: $primary;
+    color: $accent;
+  }
+
+  &:disabled {
+    background: #efefef;
+    color: $secondary;
+
+    box-shadow: none;
+    border: 1px solid $secondary;
+  }
+}
+
+a {
+  color: $primary;
+}
+
+.muted-text {
+  color: $secondary;
+  font-size: 0.75em;
+}
+
+.hr-text {
+  color: $secondary;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 51%;
+    width: 25%;
+    height: 1px;
+    background: $secondary;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+}
