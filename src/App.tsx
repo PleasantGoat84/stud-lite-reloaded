@@ -1,13 +1,28 @@
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import loadable from "@loadable/component";
 
-function App() {
+import "./App.css";
+import Header from "./Header";
+
+// Routes
+const Login = loadable(() => import("./routes/Login"));
+
+const App = () => {
   return (
-    <div className="App">
-      <header></header>
-      <main></main>
-      <footer></footer>
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <main>
+          <Switch>
+            <Route path="/">
+              <Login />
+            </Route>
+          </Switch>
+        </main>
+        <footer></footer>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
