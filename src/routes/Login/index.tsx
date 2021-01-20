@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import "./index.scss";
 
-import { apiRoot, ssoHandler } from "../../const";
+import { SSOUrl } from "../../const";
 
 import lhIcon from "../../assets/lh.svg";
 
 const Login = () => {
   const jumpToSSO = () => {
-    window.location.href = `${apiRoot}sign-on?r=${ssoHandler}`;
+    window.location.href = SSOUrl;
   };
 
   return (
