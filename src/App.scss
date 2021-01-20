@@ -7,7 +7,7 @@
 
 body {
   margin: 0;
-  font-family: "Noto Sans JP", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: $default-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,19 +18,20 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Yusei Magic", sans-serif;
+  font-family: $accent-font;
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
+  @include flex-col;
   min-height: 100vh;
 
   overflow-x: hidden;
 
   main {
-    @include flex-center;
+    @include flex-col;
     flex: 1;
+
+    width: 100%;
     background: $light;
   }
 }
@@ -41,13 +42,14 @@ h6 {
 }
 
 button {
-  @include flex-center;
+  @include flex-row-center;
 
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: $default-font;
 
   background: $accent;
   color: white;
 
+  padding: 0.2em 1em;
   border-radius: 0.4rem;
   font-size: 1.25rem;
 
@@ -90,6 +92,7 @@ a {
 .hr-text {
   color: $secondary;
   position: relative;
+  width: 100%;
 
   &::before,
   &::after {

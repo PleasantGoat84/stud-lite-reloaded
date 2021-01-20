@@ -2,12 +2,11 @@
 @import "utils/mixins";
 
 header {
-  @include flex-center;
+  @include flex-row-center;
 
   width: 100vw;
 
   background: $primary;
-
   color: $accent;
 
   z-index: 100;
