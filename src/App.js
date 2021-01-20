@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import loadable from "@loadable/component";
 
 import "./App.scss";
@@ -9,28 +14,31 @@ import Header from "./Header";
 const Login = loadable(() => import("./routes/Login"));
 const SSO = loadable(() => import("./routes/SSO"));
 
-const Routes = ({ username, setUsername }) => {
+const Routes = (props) => {
   return (
     <Switch>
       <Route path="/sso">
-        <SSO setUsername={setUsername} />
+        <SSO {...props} />
       </Route>
-      <Route path="/">
+      <Route exact path="/">
         <Login />
+      </Route>
+      <Route>
+        <Redirect to="/"></Redirect>
       </Route>
     </Switch>
   );
 };
 
 const App = () => {
-  const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(null);
 
   return (
     <Router>
       <div className="App">
         <Header />
         <main>
-          <Routes username={username} setUsername={setUsername} />
+          <Routes user={user} setUser={setUser} />
         </main>
       </div>
     </Router>

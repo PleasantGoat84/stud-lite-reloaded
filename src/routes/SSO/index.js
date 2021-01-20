@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import jwt from "jsonwebtoken";
 import { useHistory } from "react-router-dom";
 
-function SSO({ setUsername }) {
+import api from "../../api";
+
+function SSO({ user, setUser }) {
   const history = useHistory();
 
   useEffect(() => {
@@ -11,12 +13,22 @@ function SSO({ setUsername }) {
     if (mo && mo[1]) {
       const token = mo[1];
       localStorage.setItem("token", token);
-      setUsername(jwt.decode(token).user);
-      history.push("/home");
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+
+      const decoded = jwt.decode(token);
+      console.debug(decoded);
+
+      const fetchUser = async () => {
+        const res = await api.get("user");
+        console.debug(res);
+        history.push("/home");
+      };
+
+      fetchUser();
     } else {
       history.goBack();
     }
-  }, [history, setUsername]);
+  }, [history]);
 
   return <div></div>;
 }
