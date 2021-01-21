@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import jwt from "jsonwebtoken";
 import { useHistory } from "react-router-dom";
 
-import api from "../../api";
-
 function SSO({ setUser, setLoggedIn }) {
   const history = useHistory();
 
@@ -17,14 +15,8 @@ function SSO({ setUser, setLoggedIn }) {
       const decoded = jwt.decode(token);
       console.debug(decoded);
 
-      const fetchUser = async () => {
-        const res = await api.get("user");
-        setUser(res.data);
-        setLoggedIn(true);
-        history.push("/home");
-      };
-
-      fetchUser();
+      setLoggedIn(true);
+      history.push("/home");
     } else {
       history.goBack();
     }

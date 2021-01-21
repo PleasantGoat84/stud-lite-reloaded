@@ -5,7 +5,7 @@ nav {
   @include flex-row-center;
 
   position: fixed;
-  background: white;
+  background: $light;
   width: 100%;
   bottom: 0;
   position: relative;
@@ -24,7 +24,7 @@ nav {
     width: 200%;
     height: 100%;
 
-    box-shadow: 0 0 0.6rem $accent;
+    box-shadow: 0 0 0.4rem $accent;
 
     z-index: 90;
   }
@@ -35,6 +35,8 @@ nav {
     width: 0;
     flex: 1;
     padding: 0.25rem;
+
+    color: $secondary;
 
     img {
       width: 100%;

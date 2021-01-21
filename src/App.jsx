@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import loadable from "@loadable/component";
+
+import api from "./api";
 
 import "./App.scss";
 
@@ -36,8 +38,20 @@ const Routes = (props) => {
 };
 
 const App = () => {
+  const token = localStorage.getItem("token");
   const [user, setUser] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(!!token);
+
+  useEffect(() => {
+    if (loggedIn) {
+      const fetchUser = async () => {
+        const res = await api.get("user");
+        setUser(res.data);
+      };
+
+      fetchUser();
+    }
+  }, [loggedIn]);
 
   const routesProps = { user, setUser, loggedIn, setLoggedIn };
 
