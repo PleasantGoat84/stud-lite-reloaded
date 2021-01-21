@@ -1,11 +1,34 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import api from "../../api";
 import "./index.scss";
 
 import { SSOUrl } from "../../const";
 
 import lhIcon from "../../assets/lh.svg";
 
-const Login = () => {
+const Login = ({ user, setUser, loggedIn, setLoggedIn }) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const fetchUser = async () => {
+        const res = await api.get("user");
+        setUser(res.data);
+        setLoggedIn(true);
+      };
+
+      fetchUser();
+    }
+  }, [setUser, setLoggedIn]);
+
+  useEffect(() => {
+    if (loggedIn && user) {
+      history.push("/home");
+    }
+  });
+
   const jumpToSSO = () => {
     window.location.href = SSOUrl;
   };

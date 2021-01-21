@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import api from "../../api";
 
-function SSO({ user, setUser }) {
+function SSO({ setUser, setLoggedIn }) {
   const history = useHistory();
 
   useEffect(() => {
@@ -13,14 +13,14 @@ function SSO({ user, setUser }) {
     if (mo && mo[1]) {
       const token = mo[1];
       localStorage.setItem("token", token);
-      api.defaults.headers.Authorization = `Bearer ${token}`;
 
       const decoded = jwt.decode(token);
       console.debug(decoded);
 
       const fetchUser = async () => {
         const res = await api.get("user");
-        console.debug(res);
+        setUser(res.data);
+        setLoggedIn(true);
         history.push("/home");
       };
 
@@ -28,7 +28,7 @@ function SSO({ user, setUser }) {
     } else {
       history.goBack();
     }
-  }, [history]);
+  }, [history, setUser, setLoggedIn]);
 
   return <div></div>;
 }

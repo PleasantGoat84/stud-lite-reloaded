@@ -1,0 +1,49 @@
+@import "../../utils/variables";
+@import "../../utils/mixins";
+
+nav {
+  @include flex-row-center;
+
+  position: fixed;
+  background: white;
+  width: 100%;
+  bottom: 0;
+  position: relative;
+
+  height: 5.25rem;
+  padding: 0.5rem;
+
+  & > * {
+    z-index: 100;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
+
+    box-shadow: 0 0 0.6rem $accent;
+
+    z-index: 90;
+  }
+
+  a {
+    @include flex-col-center;
+    height: 100%;
+    width: 0;
+    flex: 1;
+    padding: 0.25rem;
+
+    img {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+    }
+
+    span {
+      font-size: 0.8rem;
+    }
+  }
+}
