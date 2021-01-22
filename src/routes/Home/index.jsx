@@ -9,19 +9,19 @@ const News = loadable(() => import("./News"));
 const Records = loadable(() => import("./Records"));
 const Profile = loadable(() => import("./Profile"));
 
-const Home = () => {
+const Home = (props) => {
   const { path } = useRouteMatch();
   return (
     <div className="home">
       <Switch>
         <Route path={`${path}/records`}>
-          <Records />
+          <Records {...props} />
         </Route>
         <Route path={`${path}/profile`}>
-          <Profile />
+          <Profile {...props} />
         </Route>
         <Route exact path={`${path}/`}>
-          <News />
+          <News {...props} />
         </Route>
         <Route>
           <Redirect to="/" />
