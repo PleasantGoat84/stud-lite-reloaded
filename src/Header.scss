@@ -17,6 +17,7 @@ header {
 
   &::after {
     content: "";
+
     position: absolute;
     top: 0;
     width: 200%;
@@ -36,5 +37,45 @@ header {
 
   h1 {
     margin: 0;
+  }
+
+  &.mini {
+    $bar-height: 1.5rem;
+    $circle-height: $bar-height * 2;
+    $icon-height: $circle-height * 3 / 5;
+
+    height: $bar-height;
+
+    #icon {
+      position: absolute;
+
+      top: ($circle-height - $icon-height) / 2 * 0.9;
+
+      margin-right: 0;
+
+      height: $icon-height;
+      z-index: 120;
+    }
+
+    h1 {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+
+      top: 0;
+      position: absolute;
+      width: $circle-height;
+      height: $circle-height;
+      border-radius: 50%;
+      background: $primary;
+
+      z-index: 110;
+    }
+
+    &::after {
+      display: none;
+    }
   }
 }

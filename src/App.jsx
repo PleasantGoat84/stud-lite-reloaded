@@ -25,7 +25,7 @@ const Routes = (props) => {
         <SSO {...props} />
       </Route>
       <Route path="/home">
-        {props.loggedIn ? <Home /> : <Redirect to="/" />}
+        {props.loggedIn ? <Home {...props} /> : <Redirect to="/" />}
       </Route>
       <Route exact path="/">
         <Login {...props} />
@@ -58,7 +58,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header mini={loggedIn} />
         <main>
           <Routes {...routesProps} />
         </main>
