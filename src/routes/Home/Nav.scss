@@ -31,11 +31,13 @@ nav {
 
   a {
     @include flex-col-center;
+
     height: 100%;
     width: 0;
     flex: 1;
     padding: 0.25rem;
 
+    text-decoration: none;
     color: $secondary;
 
     img {
@@ -46,6 +48,12 @@ nav {
 
     span {
       font-size: 0.8rem;
+    }
+
+    &.active {
+      color: $accent;
+      text-decoration: underline;
+      font-weight: bold;
     }
   }
 }

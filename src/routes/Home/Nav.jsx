@@ -1,26 +1,26 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./Nav.scss";
 
-const NavLink = ({ text, icon, to }) => {
+const Tab = ({ text, icon, to, exact }) => {
   const getIcon = (icon) => {
     return require(`../../assets/nav/${icon}`).default;
   };
 
   return (
-    <Link to={`/home${to}`}>
+    <NavLink to={`/home${to}`} exact={exact} activeClassName="active">
       <img src={getIcon(icon)} alt={text} />
       <span>{text}</span>
-    </Link>
+    </NavLink>
   );
 };
 
 const Nav = () => {
   return (
     <nav>
-      <NavLink icon="school.svg" text="學校消息" to="/" />
-      <NavLink icon="books.svg" text="記錄查詢" to="/records" />
-      <NavLink icon="student.svg" text="個人資料" to="/profile" />
+      <Tab icon="school.svg" text="學校消息" to="/" exact />
+      <Tab icon="books.svg" text="記錄查詢" to="/records" />
+      <Tab icon="student.svg" text="個人資料" to="/profile" />
     </nav>
   );
 };

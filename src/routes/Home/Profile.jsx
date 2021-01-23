@@ -1,17 +1,20 @@
-import React from "react";
-
 import "./Profile.scss";
+
+import manIcon from "../../assets/gender/man.svg";
+import womanIcon from "../../assets/gender/woman.svg";
+import editIcon from "../../assets/write.svg";
+import { Link } from "react-router-dom";
 
 const GenderIcon = ({ gender }) => {
   let iconSrc = "";
 
   switch (gender) {
     case "男":
-      iconSrc = require("../../assets/gender/man.svg").default;
+      iconSrc = manIcon;
       break;
 
     case "女":
-      iconSrc = require("../../assets/gender/woman.svg").default;
+      iconSrc = womanIcon;
       break;
 
     default:
@@ -32,6 +35,9 @@ const UserCard = ({ avatar, display, gender, id }) => {
         <h2 title={display}>{display}</h2>
         <h3>{id}</h3>
       </div>
+      <Link to="./">
+        <img src={editIcon} alt="Edit" className="edit" />
+      </Link>
     </div>
   );
 };
