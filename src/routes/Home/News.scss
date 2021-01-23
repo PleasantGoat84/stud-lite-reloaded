@@ -1,0 +1,84 @@
+@import "../../utils/variables";
+@import "../../utils/mixins";
+
+.news {
+  @include flex-col;
+
+  padding: 0 1rem;
+}
+.week-bar {
+  border-radius: 0.25rem;
+  box-shadow: 0.3rem 0.3rem 1rem $secondary;
+
+  h2 {
+    padding: 0.25em;
+    margin: 0;
+    text-align: center;
+    background: $accent;
+    color: white;
+
+    font-weight: normal;
+
+    border-radius: 0.25rem 0.25rem 0 0;
+  }
+
+  .remark {
+    border: 3px solid $accent;
+    color: $accent;
+    padding: 0.5em;
+    margin: 0;
+    white-space: pre-line;
+
+    border-radius: 0 0 0.25rem 0.25rem;
+  }
+
+  .week {
+    @include flex-row-center;
+
+    border: 3px solid $primary;
+
+    color: $secondary;
+    font-size: 1.2rem;
+    font-family: $accent-font;
+
+    .day-cell {
+      flex: 1;
+      margin: 0;
+      padding: 0.4em;
+      position: relative;
+
+      min-width: 2.15em;
+      text-align: center;
+      border-right: 3px solid $primary;
+
+      &:last-child {
+        border-right: 0;
+      }
+
+      &.active {
+        background: $primary;
+        color: white;
+
+        &::after {
+          content: "今天";
+          position: absolute;
+          font-size: 0.6rem;
+          right: 0;
+          bottom: 0;
+        }
+      }
+
+      &.disabled {
+        color: $light;
+        background: $secondary;
+      }
+
+      .day {
+        font-size: 0.6rem;
+        top: 0;
+        left: 0.2em;
+        position: absolute;
+      }
+    }
+  }
+}
