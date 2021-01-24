@@ -14,10 +14,7 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   font-family: $accent-font;
 }
 
@@ -36,7 +33,8 @@ h6 {
   }
 }
 
-.btn-icon {
+.btn-icon,
+.icon-left {
   width: 1.25em;
   margin-right: 0.5em;
 }
@@ -82,6 +80,10 @@ button {
 
 a {
   color: $primary;
+}
+
+table {
+  border-collapse: collapse;
 }
 
 .muted-text {

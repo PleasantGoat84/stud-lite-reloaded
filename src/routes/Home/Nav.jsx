@@ -19,7 +19,7 @@ const Nav = () => {
   return (
     <nav>
       <Tab icon="school.svg" text="學校消息" to="/" exact />
-      <Tab icon="books.svg" text="記錄查詢" to="/records" />
+      <Tab icon="books.svg" text="記錄瀏覽" to="/records" />
       <Tab icon="student.svg" text="個人資料" to="/profile" />
     </nav>
   );

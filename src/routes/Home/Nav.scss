@@ -1,6 +1,12 @@
 @import "../../utils/variables";
 @import "../../utils/mixins";
 
+$nav-height: 5.25rem;
+
+main {
+  margin-bottom: $nav-height;
+}
+
 nav {
   @include flex-row-center;
 
@@ -8,9 +14,8 @@ nav {
   background: $light;
   width: 100%;
   bottom: 0;
-  position: relative;
 
-  height: 5.25rem;
+  height: $nav-height;
   padding: 0.5rem;
 
   & > * {

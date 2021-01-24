@@ -5,19 +5,30 @@
   @include flex-col;
 
   padding: 0 1rem;
-}
-.week-bar {
-  border-radius: 0.25rem;
-  box-shadow: 0.3rem 0.3rem 1rem $secondary;
+
+  & > div {
+    margin-top: 1.25rem;
+    width: 100%;
+    border-radius: 0.25rem;
+    box-shadow: 0.3rem 0.3rem 1rem $secondary;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
 
   h2 {
+    @include flex-row-center;
+
     padding: 0.25em;
     margin: 0;
-    text-align: center;
+    font-weight: normal;
+  }
+}
+.week-bar {
+  h2 {
     background: $accent;
     color: white;
-
-    font-weight: normal;
 
     border-radius: 0.25rem 0.25rem 0 0;
   }
@@ -25,7 +36,7 @@
   .remark {
     border: 3px solid $accent;
     color: $accent;
-    padding: 0.5em;
+    padding: 0.75em;
     margin: 0;
     white-space: pre-line;
 
@@ -47,7 +58,6 @@
       padding: 0.4em;
       position: relative;
 
-      min-width: 2.15em;
       text-align: center;
       border-right: 3px solid $primary;
 
@@ -80,5 +90,112 @@
         position: absolute;
       }
     }
+  }
+}
+
+.notifications {
+  @include flex-col;
+
+  padding: 0.75rem 1rem;
+
+  background: $light;
+  color: $accent;
+
+  .notf-list {
+    list-style: none;
+    padding: 0;
+
+    background: white;
+
+    width: 100%;
+    border: 3px solid $secondary;
+
+    li {
+      padding: 0.7rem 1rem;
+      border-bottom: 3px solid $secondary;
+
+      transition: 0.1s background-color, 0.1s color;
+
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:active {
+        background: $secondary;
+        color: white;
+      }
+
+      h3,
+      h4 {
+        margin: 0;
+      }
+
+      h3 {
+        color: $primary;
+      }
+    }
+  }
+
+  .actions {
+    @include flex-row;
+    justify-content: flex-end;
+
+    width: 100%;
+  }
+}
+
+.record-meter {
+  background: $info;
+  color: white;
+
+  table {
+    width: 100%;
+    border: 3px solid $info;
+    border-radius: 0.75rem;
+
+    background: white;
+    color: $dark;
+
+    th,
+    td {
+      border: 2px solid $accent;
+      padding: 0.25rem 0.4rem;
+    }
+
+    td {
+      &.warning {
+        color: #fb8c00;
+      }
+      &.danger {
+        color: red;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      &.fail {
+        background: #544a4b;
+        font-weight: bold;
+        font-size: 1.2em;
+
+        &::after {
+          color: $dark;
+        }
+      }
+
+      &::after {
+        content: "次";
+        font-size: 0.5em;
+        margin-left: 0.25em;
+        color: $secondary;
+      }
+    }
+  }
+
+  h3 {
+    text-align: center;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.5rem;
   }
 }
