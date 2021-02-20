@@ -56,10 +56,9 @@ const WeekDay = ({ day, date, active, disabled }) => {
   );
 };
 
-const WeekBar = ({ remark }) => {
+const WeekBar = ({ remark, calendar }) => {
   const d = new Date();
   const week = getWeek(d);
-  console.debug(week);
 
   remark = "5日下午中華文化節之二；\n6/2至21/2寒假(12日春節)";
 
@@ -74,7 +73,7 @@ const WeekBar = ({ remark }) => {
           <WeekDay key={d.day} day={d.day} date={d.date} {...d.class} />
         ))}
       </div>
-      <p className="remark">{remark}</p>
+      <p className="remark">{calendar[0]?.content}</p>
     </div>
   );
 };
@@ -173,11 +172,11 @@ const RecordMeter = () => {
   );
 };
 
-const News = () => {
+const News = (props) => {
   return (
     <div className="news">
       <h1>{getDateString(new Date())}</h1>
-      <WeekBar />
+      <WeekBar {...props} />
       <NotificationsCard />
       <RecordMeter />
     </div>
