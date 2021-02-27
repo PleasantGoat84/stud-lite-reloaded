@@ -84,21 +84,11 @@ const WeekBar = ({ calendar }) => {
   );
 };
 
-const NotificationsCard = () => {
-  const notfs = [
-    {
-      title: "1月18日周會安排通知",
-      sender: "袁耀庭 主任",
-      date: "2021/01/12",
-      id: 9946,
-    },
-    {
-      title: "1月4日周會安排通知",
-      sender: "袁耀庭 主任",
-      date: "2020/12/30",
-      id: 9933,
-    },
-  ];
+const NotificationsCard = ({ news }) => {
+  const senderMapper = (sender) =>
+    sender.replace(/(校務顧問|校監|校長|副校長|校助|主任|老師|同學)/g, " $1");
+
+  const TWO_WEEKS = 2 * 7 * 24 * 60 * 60 * 1000;
 
   return (
     <div className="notifications">
@@ -107,14 +97,16 @@ const NotificationsCard = () => {
         校園通知
       </h2>
       <ul className="notf-list">
-        {notfs.map((n) => (
-          <li key={n.id}>
-            <h3>{n.title}</h3>
-            <h4>
-              {n.date} · {n.sender}
-            </h4>
-          </li>
-        ))}
+        {news
+          .filter((n) => new Date() - new Date(n.date) <= TWO_WEEKS)
+          .map((n) => (
+            <li key={n.id}>
+              <h3>{n.title}</h3>
+              <h4>
+                {n.date} · {senderMapper(n.sender)}
+              </h4>
+            </li>
+          ))}
       </ul>
       <div className="actions">
         <Link to="../news">更多...</Link>
@@ -183,7 +175,7 @@ const News = (props) => {
     <div className="news">
       <h1>{getDateString(new Date())}</h1>
       <WeekBar {...props} />
-      <NotificationsCard />
+      <NotificationsCard {...props} />
       <RecordMeter />
     </div>
   );

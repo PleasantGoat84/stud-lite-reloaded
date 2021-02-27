@@ -14,6 +14,7 @@ const Profile = loadable(() => import("./Profile"));
 const Home = (props) => {
   const { path } = useRouteMatch();
   const [calendar, setCalendar] = useState({});
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
     const fetchCalendar = async () => {
@@ -24,7 +25,13 @@ const Home = (props) => {
       setCalendar({ date: d, notice: res.data.notice });
     };
 
+    const fetchNews = async () => {
+      const res = await api.get("news");
+      setNews(res.data.news);
+    };
+
     fetchCalendar();
+    fetchNews();
   }, []);
 
   return (
@@ -37,7 +44,7 @@ const Home = (props) => {
           <Profile {...props} />
         </Route>
         <Route exact path={`${path}/`}>
-          <News {...props} calendar={calendar} />
+          <News {...props} calendar={calendar} news={news} />
         </Route>
         <Route>
           <Redirect to="/" />
