@@ -3,6 +3,8 @@ import "./Profile.scss";
 import manIcon from "../../assets/gender/man.svg";
 import womanIcon from "../../assets/gender/woman.svg";
 import editIcon from "../../assets/write.svg";
+
+import avatarImg from "../../assets/icon.jfif";
 import { Link } from "react-router-dom";
 
 const GenderIcon = ({ gender }) => {
@@ -46,7 +48,7 @@ const Profile = ({ user }) => {
   return (
     <div className="profile">
       <UserCard
-        avatar="https://cdn.discordapp.com/avatars/578869529783042048/a02c08a2f068822669d05495f682a007.webp?size=128"
+        avatar={avatarImg}
         display={user && user.display}
         gender={user && user.gender}
         id={user && user.id}
