@@ -13,12 +13,15 @@ const Profile = loadable(() => import("./Profile"));
 
 const Home = (props) => {
   const { path } = useRouteMatch();
-  const [calendar, setCalendar] = useState([]);
+  const [calendar, setCalendar] = useState({});
 
   useEffect(() => {
     const fetchCalendar = async () => {
-      const res = await api.get("calendar");
-      setCalendar(res.data.notice);
+      const d = new Date();
+      const res = await api.get("calendar", {
+        params: { d: d.toISOString().substring(0, 10) },
+      });
+      setCalendar({ date: d, notice: res.data.notice });
     };
 
     fetchCalendar();

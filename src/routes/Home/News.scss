@@ -20,9 +20,18 @@
   h2 {
     @include flex-row-center;
 
+    position: relative;
+
     padding: 0.25em;
     margin: 0;
     font-weight: normal;
+
+    #week-id {
+      position: absolute;
+      font-size: 0.6em;
+      font-weight: normal;
+      right: 1em;
+    }
   }
 }
 .week-bar {
@@ -65,6 +74,23 @@
         border-right: 0;
       }
 
+      &.disabled {
+        color: $light;
+        background: $secondary;
+      }
+
+      &.off {
+        background: #00c04d;
+        color: $light;
+      }
+
+      .day {
+        font-size: 0.6rem;
+        top: 0;
+        left: 0.2em;
+        position: absolute;
+      }
+
       &.active {
         background: $primary;
         color: white;
@@ -76,18 +102,6 @@
           right: 0;
           bottom: 0;
         }
-      }
-
-      &.disabled {
-        color: $light;
-        background: $secondary;
-      }
-
-      .day {
-        font-size: 0.6rem;
-        top: 0;
-        left: 0.2em;
-        position: absolute;
       }
     }
   }

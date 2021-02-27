@@ -11,7 +11,7 @@ function getDateString(date) {
   return `${y}年${m}月${d}日`;
 }
 
-function getWeek(date) {
+function getWeek(date, off) {
   const startDate = date.getDate() - date.getDay();
 
   const curDate = new Date(date);
@@ -21,7 +21,8 @@ function getWeek(date) {
   const week = [];
 
   for (let i = 0; i < 7; i++) {
-    curDate.setDate(startDate + i);
+    if (i > 0) curDate.setDate(curDate.getDate() + 1);
+
     const cur = curDate.getDate();
     week.push({
       date: cur,
@@ -29,6 +30,7 @@ function getWeek(date) {
       class: {
         active: cur === date.getDate(),
         disabled: curDate < date,
+        isOff: i === 0 || off === "ALL_OFF" || off.includes(cur),
       },
     });
   }
@@ -43,37 +45,41 @@ function getRecordClass(value, trigger) {
   return "fail";
 }
 
-const WeekDay = ({ day, date, active, disabled }) => {
+const WeekDay = ({ day, date, active, disabled, isOff }) => {
+  let className = "day-cell";
+  if (active) className += " active";
+  if (disabled) className += " disabled";
+  if (isOff) className += " off";
+
   return (
-    <div
-      className={`day-cell${active ? " active" : ""}${
-        disabled ? " disabled" : ""
-      }`}
-    >
+    <div className={className}>
       {date}
       <span className="day">{day}</span>
     </div>
   );
 };
 
-const WeekBar = ({ remark, calendar }) => {
-  const d = new Date();
-  const week = getWeek(d);
+const WeekBar = ({ calendar }) => {
+  const notice = calendar.notice?.[0];
 
-  remark = "5日下午中華文化節之二；\n6/2至21/2寒假(12日春節)";
+  const week = calendar.date ? getWeek(calendar.date, notice.off) : [];
+
+  const noticeContentMapper = (content) =>
+    content ? content.split(/[;；,，]\s*/g).join("\n") : "本週沒有備注";
 
   return (
     <div className="week-bar">
       <h2>
         <img src={calendarIcon} alt="Calendar" className="icon-left" />
         行事暦
+        {notice?.weekId && <span id="week-id">{`第${notice?.weekId}週`}</span>}
       </h2>
       <div className="week">
         {week.map((d) => (
           <WeekDay key={d.day} day={d.day} date={d.date} {...d.class} />
         ))}
       </div>
-      <p className="remark">{calendar[0]?.content}</p>
+      <p className="remark">{noticeContentMapper(notice?.content)}</p>
     </div>
   );
 };
