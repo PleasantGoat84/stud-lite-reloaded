@@ -8,7 +8,7 @@ function SSO({ setUser, setLoggedIn }) {
   useEffect(() => {
     const mo = window.location.search.match(/t=([^&]+)/);
 
-    if (mo && mo[1]) {
+    if (mo?.[1]) {
       const token = mo[1];
       localStorage.setItem("token", token);
 

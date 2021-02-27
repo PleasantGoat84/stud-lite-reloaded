@@ -49,9 +49,9 @@ const Profile = ({ user }) => {
     <div className="profile">
       <UserCard
         avatar={avatarImg}
-        display={user && user.display}
-        gender={user && user.gender}
-        id={user && user.id}
+        display={user?.display}
+        gender={user?.gender}
+        id={user?.id}
       />
     </div>
   );
