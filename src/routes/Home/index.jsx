@@ -15,6 +15,7 @@ const Home = (props) => {
   const { path } = useRouteMatch();
   const [calendar, setCalendar] = useState({});
   const [news, setNews] = useState([]);
+  const [quota, setQuota] = useState([]);
 
   useEffect(() => {
     const fetchCalendar = async () => {
@@ -30,8 +31,14 @@ const Home = (props) => {
       setNews(res.data.news);
     };
 
+    const fetchQuota = async () => {
+      const res = await api.get("quota");
+      setQuota(res.data);
+    };
+
     fetchCalendar();
     fetchNews();
+    fetchQuota();
   }, []);
 
   return (
@@ -44,7 +51,7 @@ const Home = (props) => {
           <Profile {...props} />
         </Route>
         <Route exact path={`${path}/`}>
-          <News {...props} calendar={calendar} news={news} />
+          <News {...props} calendar={calendar} news={news} quota={quota} />
         </Route>
         <Route>
           <Redirect to="/" />

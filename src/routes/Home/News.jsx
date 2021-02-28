@@ -103,7 +103,8 @@ const NotificationsCard = ({ news }) => {
             <li key={n.id}>
               <h3>{n.title}</h3>
               <h4>
-                {n.date} · {senderMapper(n.sender)}
+                {new Date(n.date).toISOString().substr(0, 10)} ·{" "}
+                {senderMapper(n.sender)}
               </h4>
             </li>
           ))}
@@ -115,29 +116,8 @@ const NotificationsCard = ({ news }) => {
   );
 };
 
-const RecordMeter = () => {
-  const records = [
-    {
-      name: "欠功課",
-      value: 2,
-      trigger: 5,
-    },
-    {
-      name: "欠書",
-      value: 0,
-      trigger: 5,
-    },
-    {
-      name: "遲到",
-      value: 1,
-      trigger: 3,
-    },
-    {
-      name: "缺席",
-      value: 0,
-      trigger: 3,
-    },
-  ];
+const RecordMeter = ({ quota }) => {
+  const record = quota?.record || [];
 
   return (
     <div className="record-meter">
@@ -148,24 +128,24 @@ const RecordMeter = () => {
       <table>
         <thead>
           <tr>
-            {records.map((r) => (
-              <th scope="col" key={r.name}>
-                {r.name}
+            {record.map((r) => (
+              <th scope="col" key={r.type}>
+                {r.type}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
           <tr>
-            {records.map((r) => (
-              <td key={r.name} className={getRecordClass(r.value, r.trigger)}>
+            {record.map((r) => (
+              <td key={r.type} className={getRecordClass(r.value, r.quota)}>
                 {r.value}
               </td>
             ))}
           </tr>
         </tbody>
       </table>
-      <h3>第二學段</h3>
+      <h3>第 {quota.curTerm ? quota.curTerm + 1 : "-"} 學段</h3>
     </div>
   );
 };
@@ -176,7 +156,7 @@ const News = (props) => {
       <h1>{getDateString(new Date())}</h1>
       <WeekBar {...props} />
       <NotificationsCard {...props} />
-      <RecordMeter />
+      <RecordMeter {...props} />
     </div>
   );
 };
