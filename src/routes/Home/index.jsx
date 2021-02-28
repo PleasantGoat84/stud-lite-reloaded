@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useRouteMatch, Redirect } from "react-router-dom";
 import loadable from "@loadable/component";
 
+import { normalizeDate } from "../../App";
 import api from "../../api";
 
 import "./index.scss";
@@ -21,7 +22,7 @@ const Home = (props) => {
     const fetchCalendar = async () => {
       const d = new Date();
       const res = await api.get("calendar", {
-        params: { d: d.toISOString().substring(0, 10) },
+        params: { d: normalizeDate(d) },
       });
       setCalendar({ date: d, notice: res.data.notice });
     };

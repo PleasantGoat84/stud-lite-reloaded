@@ -16,6 +16,7 @@ h1,
 h2,
 h3 {
   font-family: $accent-font;
+  font-weight: normal;
 }
 
 .App {
@@ -24,9 +25,11 @@ h3 {
 
   overflow-x: hidden;
 
-  main {
+  & > main {
     @include flex-col;
     flex: 1;
+
+    padding-top: $bar-height;
 
     width: 100%;
     background: $light;
@@ -111,9 +114,13 @@ table {
     border: 0.3rem solid $primary;
 
     min-height: 60%;
-    max-height: 70%;
+    max-height: 75%;
 
     overflow-y: scroll;
+
+    footer {
+      text-align: right;
+    }
   }
 
   .dialog-close {

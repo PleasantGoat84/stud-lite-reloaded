@@ -1,21 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import closeIcon from "../assets/cancel.svg";
-import { cloneDeep } from "lodash";
 
-function DialogSystem() {
-  const [msg, setMsg] = useState([]);
-
-  const closeDialog = (idx) => () => {
-    const newMsg = cloneDeep(msg);
-    newMsg.splice(idx, 1);
-    setMsg(newMsg);
-  };
-
-  const updateContent = (idx, newContent) => {
-    const newMsg = cloneDeep(msg);
-    newMsg[idx].content = newContent;
-    setMsg(newMsg);
-  };
+function DialogSystem({ dialogMsg: msg, closeDialog }) {
+  const contentMapper = (str) =>
+    str.split(/\s*\n+\s*/g).map((p, i) => <p key={i}>{p}</p>);
 
   return msg.map((m, i) => (
     <div className="dialog-overlay" key={i}>
@@ -28,13 +16,23 @@ function DialogSystem() {
 
       <dialog open>
         <article>
-          <h1>{m.title}</h1>
+          <header>
+            <h1>{m.title}</h1>
 
-          {m.subtitle && <h2>{m.subtitle}</h2>}
+            {m.subtitle && <h2>{m.subtitle}</h2>}
+          </header>
 
-          {m.content.split(/[\n\s]+/g).map((p, j) => (
-            <p key={j}>{p}</p>
-          ))}
+          <hr />
+
+          <main>{contentMapper(m.content)}</main>
+
+          {m.footer && (
+            <>
+              <hr />
+
+              <footer>{contentMapper(m.footer)}</footer>
+            </>
+          )}
         </article>
       </dialog>
     </div>

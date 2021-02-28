@@ -1,11 +1,11 @@
 @import "../../utils/variables";
 @import "../../utils/mixins";
 
-main {
+.App > main {
   margin-bottom: $nav-height;
 }
 
-nav {
+.App > nav {
   @include flex-row-center;
 
   position: fixed;

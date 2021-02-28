@@ -1,7 +1,7 @@
 @import "utils/variables";
 @import "utils/mixins";
 
-header {
+.App > header {
   @include flex-row-center;
 
   width: 100vw;
@@ -9,7 +9,7 @@ header {
   background: $primary;
   color: $accent;
 
-  position: relative;
+  position: fixed;
 
   z-index: 95;
 

@@ -5,9 +5,11 @@ import notificationIcon from "../../assets/notification.svg";
 import recordIcon from "../../assets/school-bell.svg";
 
 import { Link } from "react-router-dom";
+import { normalizeDate } from "../../App";
+import api from "../../api";
 
 function getDateString(date) {
-  const [y, m, d] = date.toISOString().substr(0, 10).split("-");
+  const [y, m, d] = normalizeDate(date).split("-");
   return `${y}年${m}月${d}日`;
 }
 
@@ -84,11 +86,28 @@ const WeekBar = ({ calendar }) => {
   );
 };
 
-const NotificationsCard = ({ news }) => {
+const NotificationsCard = ({ news, openDialog, updateDialog }) => {
   const senderMapper = (sender) =>
     sender.replace(/(校務顧問|校監|校長|副校長|校助|主任|老師|同學)/g, " $1");
 
   const TWO_WEEKS = 2 * 7 * 24 * 60 * 60 * 1000;
+
+  const readNotf = (id) => async () => {
+    const notf = news.find((n) => n.id === id);
+    const preConfig = {
+      title: notf.title,
+      content: "",
+      footer: senderMapper(notf.sender) + "\n" + normalizeDate(notf.date),
+    };
+    const dialogId = openDialog(preConfig);
+
+    const res = await api.get("news", { params: { id } });
+
+    updateDialog(dialogId, {
+      ...preConfig,
+      content: res.data.content,
+    });
+  };
 
   return (
     <div className="notifications">
@@ -100,11 +119,10 @@ const NotificationsCard = ({ news }) => {
         {news
           .filter((n) => new Date() - new Date(n.date) <= TWO_WEEKS)
           .map((n) => (
-            <li key={n.id}>
+            <li key={n.id} onClick={readNotf(n.id)}>
               <h3>{n.title}</h3>
               <h4>
-                {new Date(n.date).toISOString().substr(0, 10)} ·{" "}
-                {senderMapper(n.sender)}
+                {normalizeDate(n.date)} · {senderMapper(n.sender)}
               </h4>
             </li>
           ))}
