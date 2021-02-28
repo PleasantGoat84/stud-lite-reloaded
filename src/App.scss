@@ -86,6 +86,67 @@ table {
   border-collapse: collapse;
 }
 
+.dialog-overlay {
+  @include flex-col-center;
+
+  position: fixed;
+  top: 0;
+  bottom: $nav-height;
+  left: 0;
+  right: 0;
+
+  z-index: 80;
+
+  padding: 5%;
+
+  dialog {
+    position: relative;
+    background: $light;
+    color: $accent;
+
+    padding: 5%;
+    width: 100%;
+
+    border-radius: 0.5rem;
+    border: 0.3rem solid $primary;
+
+    min-height: 60%;
+    max-height: 70%;
+
+    overflow-y: scroll;
+  }
+
+  .dialog-close {
+    position: absolute;
+    width: 10%;
+    right: 0.5rem;
+    top: $bar-height + 0.6rem;
+    z-index: 130;
+
+    cursor: pointer;
+
+    transition: 0.1s filter;
+
+    &:active {
+      filter: brightness(1.75);
+    }
+  }
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+    background: $dark;
+
+    opacity: 0.9;
+  }
+}
+
 .muted-text {
   color: $secondary;
   font-size: 0.75em;

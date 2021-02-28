@@ -11,6 +11,8 @@ header {
 
   position: relative;
 
+  z-index: 95;
+
   & > * {
     z-index: 100;
   }
@@ -40,7 +42,6 @@ header {
   }
 
   &.mini {
-    $bar-height: 1.5rem;
     $circle-height: $bar-height * 2;
     $icon-height: $circle-height * 3 / 5;
 

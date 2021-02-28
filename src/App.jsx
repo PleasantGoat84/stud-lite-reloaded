@@ -13,6 +13,8 @@ import "./App.scss";
 
 // Routes
 import Header from "./Header";
+import DialogSystem from "./components/DialogSystem";
+
 const Login = loadable(() => import("./routes/Login"));
 const SSO = loadable(() => import("./routes/SSO"));
 const Home = loadable(() => import("./routes/Home"));
@@ -63,6 +65,7 @@ const App = () => {
           <Routes {...routesProps} />
         </main>
         {loggedIn && <Nav />}
+        <DialogSystem />
       </div>
     </Router>
   );
