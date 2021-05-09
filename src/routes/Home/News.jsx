@@ -96,7 +96,7 @@ const NotificationsCard = ({ news, openDialog, updateDialog }) => {
     const notf = news.find((n) => n.id === id);
     const preConfig = {
       title: notf.title,
-      content: "",
+      content: "載入中...",
       footer: senderMapper(notf.sender) + "\n" + normalizeDate(notf.date),
     };
     const dialogId = openDialog(preConfig);
