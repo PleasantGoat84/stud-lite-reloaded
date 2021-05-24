@@ -1,6 +1,10 @@
 @import "../../utils/variables";
 @import "../../utils/mixins";
 
+.profile {
+  margin-top: -1rem;
+}
+
 .user-card {
   @include flex-row;
 

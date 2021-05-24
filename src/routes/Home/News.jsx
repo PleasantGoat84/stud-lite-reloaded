@@ -5,7 +5,7 @@ import notificationIcon from "../../assets/notification.svg";
 import recordIcon from "../../assets/school-bell.svg";
 
 import { Link } from "react-router-dom";
-import { normalizeDate } from "../../App";
+import { normalizeDate, LOCAL_DAY } from "../../App";
 import api from "../../api";
 
 function getDateString(date) {
@@ -19,7 +19,7 @@ function getWeek(date, off) {
   const curDate = new Date(date);
   curDate.setDate(startDate);
 
-  const days = ["日", "一", "二", "三", "四", "五", "六"];
+  const days = LOCAL_DAY;
   const week = [];
 
   for (let i = 0; i < 7; i++) {

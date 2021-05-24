@@ -20,6 +20,8 @@ const SSO = loadable(() => import("./routes/SSO"));
 const Home = loadable(() => import("./routes/Home"));
 const Nav = loadable(() => import("./routes/Home/Nav"));
 
+export const LOCAL_DAY = ["日", "一", "二", "三", "四", "五", "六"];
+
 export function normalizeDate(d) {
   return new Date(d).toISOString().substr(0, 10);
 }

@@ -4,6 +4,7 @@ import loadable from "@loadable/component";
 
 // Routes
 const MainMenu = loadable(() => import("./MainMenu"));
+const Timetable = loadable(() => import("./Timetable"));
 
 const Records = (props) => {
   const { path } = useRouteMatch();
@@ -12,7 +13,7 @@ const Records = (props) => {
     <div className="records">
       <Switch>
         <Route path={`${path}timetable`}>
-          {/* <Timetable {...props} /> */}
+          <Timetable {...props} />
         </Route>
         <Route exact path={`${path}`}>
           <MainMenu {...props} />
