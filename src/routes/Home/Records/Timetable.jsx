@@ -2,7 +2,11 @@ import "./Timetable.scss";
 
 import React, { useEffect, useState } from "react";
 import api from "../../../api";
+import loadable from "@loadable/component";
+
 import { LOCAL_DAY } from "../../../App";
+
+const Spinner = loadable(() => import("../../../components/Spinner"));
 
 const MainMenu = (props) => {
   const [classId, setClassId] = useState("");
@@ -42,7 +46,7 @@ const MainMenu = (props) => {
 
   return (
     <div className="timetable">
-      {!!classId.length && (
+      {!!classId.length ? (
         <>
           <h1>
             <span className="class-id">{classId}</span>課程安排
@@ -71,6 +75,8 @@ const MainMenu = (props) => {
             </tbody>
           </table>
         </>
+      ) : (
+        <Spinner />
       )}
     </div>
   );

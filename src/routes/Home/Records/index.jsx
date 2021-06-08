@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useRouteMatch, Redirect } from "react-router-dom";
+import { Switch, Route, useRouteMatch, Redirect, Link } from "react-router-dom";
 import loadable from "@loadable/component";
 
 // Routes
@@ -7,7 +7,7 @@ const MainMenu = loadable(() => import("./MainMenu"));
 const Timetable = loadable(() => import("./Timetable"));
 
 const Records = (props) => {
-  const { path } = useRouteMatch();
+  const { path, isExact } = useRouteMatch();
 
   return (
     <div className="records">
@@ -22,6 +22,11 @@ const Records = (props) => {
           <Redirect to={`${path}`} />
         </Route>
       </Switch>
+      {!isExact && (
+        <Link to={path} className="no-under">
+          <button className="mx-auto mt">返回</button>
+        </Link>
+      )}
     </div>
   );
 };

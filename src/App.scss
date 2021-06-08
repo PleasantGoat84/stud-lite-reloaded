@@ -50,7 +50,7 @@ button {
   background: $accent;
   color: white;
 
-  padding: 0.2em 1em;
+  padding: 0.2em 1.5em;
   border-radius: 0.4rem;
   font-size: 1.25rem;
 
@@ -79,10 +79,23 @@ button {
 
     font-size: 1rem;
   }
+
+  &.mt {
+    margin-top: 2em;
+  }
+
+  &.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 a {
   color: $primary;
+
+  &.no-under {
+    text-decoration: none;
+  }
 }
 
 table {
