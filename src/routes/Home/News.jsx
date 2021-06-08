@@ -87,10 +87,11 @@ const WeekBar = ({ calendar }) => {
 };
 
 const NotificationsCard = ({ news, openDialog, updateDialog }) => {
+  const TWO_WEEKS = 2 * 7 * 24 * 60 * 60 * 1000;
+  news = news.filter((n) => new Date() - new Date(n.date) <= TWO_WEEKS);
+
   const senderMapper = (sender) =>
     sender.replace(/(校務顧問|校監|校長|副校長|校助|主任|老師|同學)/g, " $1");
-
-  const TWO_WEEKS = 2 * 7 * 24 * 60 * 60 * 1000;
 
   const readNotf = (id) => async () => {
     const notf = news.find((n) => n.id === id);
@@ -116,16 +117,20 @@ const NotificationsCard = ({ news, openDialog, updateDialog }) => {
         校園通知
       </h2>
       <ul className="notf-list">
-        {news
-          .filter((n) => new Date() - new Date(n.date) <= TWO_WEEKS)
-          .map((n) => (
+        {news.length ? (
+          news.map((n) => (
             <li key={n.id} onClick={readNotf(n.id)}>
               <h3>{n.title}</h3>
               <h4>
                 {normalizeDate(n.date)} · {senderMapper(n.sender)}
               </h4>
             </li>
-          ))}
+          ))
+        ) : (
+          <li>
+            <h3>暫無最新通知</h3>
+          </li>
+        )}
       </ul>
       <div className="actions">
         <Link to="../news">更多...</Link>

@@ -43,5 +43,9 @@
         font-size: 0.6em;
       }
     }
+
+    tbody tr:nth-child(5) {
+      border-bottom: $primary solid 0.5rem;
+    }
   }
 }
