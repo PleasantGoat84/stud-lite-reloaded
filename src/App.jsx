@@ -9,8 +9,6 @@ import loadable from "@loadable/component";
 
 import api from "./api";
 
-import "./App.scss";
-
 // Routes
 import Header from "./Header";
 import DialogSystem from "./components/DialogSystem";
@@ -70,9 +68,9 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App flex flex-col min-h-screen">
         <Header mini={loggedIn} />
-        <main>
+        <main className="flex flex-col flex-grow mt-16 w-full bg-light">
           <DialogSystem>
             <Routes {...routesProps} />
           </DialogSystem>

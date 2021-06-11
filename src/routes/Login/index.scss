@@ -28,9 +28,6 @@
     .login-btn-container {
       @include flex-col-center;
       flex: 1;
-
-      padding: 0 1.5rem;
-
       #lh-icon {
         margin-top: 2px;
       }

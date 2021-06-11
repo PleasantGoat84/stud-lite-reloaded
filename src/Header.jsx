@@ -1,11 +1,14 @@
 import Icon from "./assets/icon.svg";
-import "./Header.scss";
 
 const Header = ({ mini }) => {
   return (
-    <header className={mini ? "mini" : ""}>
-      <img src={Icon} alt="StudLite Icon" id="icon" />
-      <h1>StudLite</h1>
+    <header
+      className={`flex justify-center items-center bg-primary text-secondary fixed z-30 shadow-lg py-3 w-full ${
+        mini ? " mini" : ""
+      }`}
+    >
+      <img src={Icon} alt="StudLite Icon" id="icon" className="w-10 mr-3" />
+      <h1 className="text-2xl font-semibold">StudLite</h1>
     </header>
   );
 };

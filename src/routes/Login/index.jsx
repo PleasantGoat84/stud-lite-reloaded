@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./index.scss";
 
 import { SSOUrl } from "../../const";
 
@@ -20,11 +19,11 @@ const Login = ({ user, setUser, loggedIn, setLoggedIn }) => {
   };
 
   return (
-    <div className="login">
-      <div className="login-card">
-        <h1>進入 StudLite</h1>
-        <div className="hr-text">使用以下方式</div>
-        <div className="login-btn-container">
+    <div className="login flex flex-col flex-grow items-center justify-center pb-16">
+      <div className="login-card flex flex-col items-center w-72 bg-white p-4 rounded-md shadow">
+        <h1 className="text-2xl font-medium mb-4">進入 StudLite</h1>
+        <h2>使用以下方式</h2>
+        <div className="login-btn-container flex flex-col flex-grow">
           <button onClick={jumpToSSO}>
             <img
               src={lhIcon}
