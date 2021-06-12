@@ -27,8 +27,8 @@ const Login = ({ user, setUser, loggedIn, setLoggedIn }) => {
           <button onClick={jumpToSSO}>
             <img
               src={lhIcon}
-              alt="login with louhau account"
-              className="btn-icon"
+              alt="勞校中學圖標"
+              className="w-12"
               id="lh-icon"
             />
             勞校中學帳號
