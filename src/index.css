@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  button {
+@layer components {
+  .btn {
     @apply flex
     items-center
+    justify-center
     bg-secondary
     text-white
     py-3
@@ -16,6 +17,14 @@
     transition-colors
     hover:bg-primary
     hover:text-secondary
-    disabled:bg-gray-50;
+    disabled:bg-gray-50
+    disabled:text-browny
+    disabled:border-2
+    disabled:border-browny
+    disabled:cursor-not-allowed;
+  }
+  .icon {
+    @apply w-8
+    mr-3;
   }
 }

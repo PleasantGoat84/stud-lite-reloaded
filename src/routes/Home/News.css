@@ -1,0 +1,38 @@
+@layer components {
+  .icon {
+    @apply w-8
+    mr-3;
+  }
+  .news-card {
+    @apply mt-5
+    flex
+    flex-col
+    w-full
+    rounded
+    shadow-lg;
+  }
+  .news-card h2 {
+    @apply flex
+    items-center
+    justify-center
+    font-semibold
+    relative
+    text-xl
+    p-2;
+  }
+  .news-card h2 img {
+    @apply icon;
+  }
+  .news-card li {
+    @apply px-4
+    py-3
+    border-b-2
+    border-browny
+    transition-colors
+    duration-100
+    cursor-pointer
+    last:border-b-0
+    active:bg-browny
+    active:text-white;
+  }
+}

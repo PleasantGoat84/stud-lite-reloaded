@@ -1,5 +1,3 @@
-import "./News.scss";
-
 import calendarIcon from "../../assets/schedule.svg";
 import notificationIcon from "../../assets/notification.svg";
 import recordIcon from "../../assets/school-bell.svg";
@@ -7,6 +5,8 @@ import recordIcon from "../../assets/school-bell.svg";
 import { Link } from "react-router-dom";
 import { normalizeDate, LOCAL_DAY } from "../../App";
 import api from "../../api";
+
+import "./News.css";
 
 function getDateString(date) {
   const [y, m, d] = normalizeDate(date).split("-");
@@ -48,15 +48,21 @@ function getRecordClass(value, trigger) {
 }
 
 const WeekDay = ({ day, date, active, disabled, isOff }) => {
-  let className = "day-cell";
-  if (active) className += " active";
-  if (disabled) className += " disabled";
-  if (isOff) className += " off";
+  let className =
+    "flex-grow py-3 relative text-center border-r-2 border-primary last:border-r-0";
+  if (active) className += " bg-primary text-white";
+  if (disabled) className += " bg-browny text-light";
+  if (isOff) className += " bg-green-400 text-light";
 
   return (
     <div className={className}>
       {date}
-      <span className="day">{day}</span>
+      <span className="text-xs absolute top-0 left-1 font-normal">{day}</span>
+      {active && (
+        <span className="absolute text-xs right-0 bottom-0 font-normal">
+          今天
+        </span>
+      )}
     </div>
   );
 };
@@ -70,18 +76,22 @@ const WeekBar = ({ calendar }) => {
     content ? content.split(/[;；,，]\s*/g).join("\n") : "本週沒有備注";
 
   return (
-    <div className="week-bar">
-      <h2>
-        <img src={calendarIcon} alt="Calendar" className="icon-left" />
+    <div className="news-card">
+      <h2 className="bg-secondary text-white rounded-t">
+        <img src={calendarIcon} alt="Calendar" />
         行事暦
-        {notice?.weekId && <span id="week-id">{`第${notice?.weekId}週`}</span>}
+        {notice?.weekId && (
+          <span className="absolute right-3 text-base">{`第${notice?.weekId}週`}</span>
+        )}
       </h2>
-      <div className="week">
+      <div className="flex items-center justify-center border-2 border-primary text-browny text-xl font-semibold">
         {week.map((d) => (
           <WeekDay key={d.day} day={d.day} date={d.date} {...d.class} />
         ))}
       </div>
-      <p className="remark">{noticeContentMapper(notice?.content)}</p>
+      <p className="border-2 border-secondary p-3 whitespace-pre-line rounded-b">
+        {noticeContentMapper(notice?.content)}
+      </p>
     </div>
   );
 };
@@ -111,12 +121,12 @@ const NotificationsCard = ({ news, openDialog, updateDialog }) => {
   };
 
   return (
-    <div className="notifications">
+    <div className="news-card bg-light text-secondary px-4">
       <h2>
         <img src={notificationIcon} alt="" className="icon-left" />
         校園通知
       </h2>
-      <ul className="notf-list">
+      <ul className="notf-list bg-white w-full border-2 border-browny">
         {news.length ? (
           news.map((n) => (
             <li key={n.id} onClick={readNotf(n.id)}>
@@ -143,7 +153,7 @@ const RecordMeter = ({ quota }) => {
   const record = quota?.record || [];
 
   return (
-    <div className="record-meter">
+    <div className="record-meter news-card">
       <h2>
         <img src={recordIcon} alt="Record" className="icon-left" />
         日常表現
@@ -175,8 +185,10 @@ const RecordMeter = ({ quota }) => {
 
 const News = (props) => {
   return (
-    <div className="news">
-      <h1>{getDateString(new Date())}</h1>
+    <div className="flex flex-col px-4 news">
+      <h1 className="text-center text-3xl font-bold">
+        {getDateString(new Date())}
+      </h1>
       <WeekBar {...props} />
       <NotificationsCard {...props} />
       <RecordMeter {...props} />

@@ -5,8 +5,6 @@ import loadable from "@loadable/component";
 import { normalizeDate } from "../../App";
 import api from "../../api";
 
-import "./index.scss";
-
 // Routes
 const News = loadable(() => import("./News"));
 const Records = loadable(() => import("./Records/"));
@@ -43,7 +41,7 @@ const Home = (props) => {
   }, []);
 
   return (
-    <div className="home">
+    <div className="bg-white w-full flex-grow pt-4 pb-12">
       <Switch>
         <Route path={`${path}/records/`}>
           <Records {...props} />
