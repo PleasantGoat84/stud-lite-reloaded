@@ -41,7 +41,7 @@ const Home = (props) => {
   }, []);
 
   return (
-    <div className="bg-white w-full flex-grow pt-4 pb-12">
+    <div className="bg-white w-full flex-grow pt-6 pb-12">
       <Switch>
         <Route path={`${path}/records/`}>
           <Records {...props} />

@@ -70,7 +70,12 @@ const App = () => {
     <Router>
       <div className="App flex flex-col min-h-screen">
         <Header mini={loggedIn} />
-        <main className="flex flex-col flex-grow mt-6 w-full bg-light mb-20">
+        <main
+          className={
+            "flex flex-col flex-grow mt-6 w-full bg-light" +
+            (loggedIn ? " mb-20" : "")
+          }
+        >
           <DialogSystem>
             <Routes {...routesProps} />
           </DialogSystem>

@@ -10,7 +10,7 @@ const Records = (props) => {
   const { path, isExact } = useRouteMatch();
 
   return (
-    <div className="records">
+    <div>
       <Switch>
         <Route path={`${path}timetable`}>
           <Timetable {...props} />
@@ -24,7 +24,7 @@ const Records = (props) => {
       </Switch>
       {!isExact && (
         <Link to={path} className="no-under">
-          <button className="mx-auto mt">返回</button>
+          <button className="btn mx-auto mt-5">返回</button>
         </Link>
       )}
     </div>

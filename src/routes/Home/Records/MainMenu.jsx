@@ -1,5 +1,3 @@
-import "./MainMenu.scss";
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -40,15 +38,16 @@ const MainMenu = (props) => {
   ];
 
   return (
-    <div className="main-menu">
+    <div className="grid gap-4 p-4 grid-cols-2">
       {btns.map((b) => (
         <Link
           key={b.to}
           to={`./${b.to}`}
           style={{ backgroundColor: b.bgColor, color: b.color || "white" }}
+          className="flex flex-col items-center text-center rounded border-2 border-secondary shadow px-1 py-4"
         >
-          <img src={b.icon} alt={b.label} />
-          <h2>{b.label}</h2>
+          <img src={b.icon} alt={b.label} className="w-3/4 object contain" />
+          <h2 className="mt-4 text-xl">{b.label}</h2>
         </Link>
       ))}
     </div>

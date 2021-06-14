@@ -1,5 +1,3 @@
-import "./Profile.scss";
-
 import manIcon from "../../assets/gender/man.svg";
 import womanIcon from "../../assets/gender/woman.svg";
 import editIcon from "../../assets/write.svg";
@@ -23,22 +21,37 @@ const GenderIcon = ({ gender }) => {
       break;
   }
 
-  return <img src={iconSrc} alt={gender} className="gender" />;
+  return (
+    <img
+      src={iconSrc}
+      alt={gender}
+      className="absolute -right-4 -bottom-1 w-8"
+    />
+  );
 };
 
 const UserCard = ({ avatar, display, gender, id }) => {
   return (
-    <div className="user-card">
-      <div className="avatar-container">
-        <img src={avatar} alt={display} className="avatar" />
+    <div className="flex items-center bg-browny text-white px-6 py-8">
+      <div className="avatar-container w-20 relative h-20">
+        <img
+          src={avatar}
+          alt={display}
+          className="w-full h-full rounded-xl border-4 border-light shadow-lg"
+        />
         <GenderIcon gender={gender} />
       </div>
-      <div className="displays">
-        <h2 title={display}>{display}</h2>
-        <h3>{id}</h3>
+      <div className="flex flex-col flex-grow h-4/5 ml-5">
+        <h2
+          title={display}
+          className="overflow-ellipsis whitespace-nowrap overflow-hidden my-1 text-2xl font-bold"
+        >
+          {display}
+        </h2>
+        <h3 className="text-lg">{id}</h3>
       </div>
       <Link to="./">
-        <img src={editIcon} alt="Edit" className="edit" />
+        <img src={editIcon} alt="Edit" className="w-8" />
       </Link>
     </div>
   );
@@ -46,7 +59,7 @@ const UserCard = ({ avatar, display, gender, id }) => {
 
 const Profile = ({ user }) => {
   return (
-    <div className="profile">
+    <div className="-mt-4">
       <UserCard
         avatar={avatarImg}
         display={user?.display}
