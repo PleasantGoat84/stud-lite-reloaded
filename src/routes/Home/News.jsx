@@ -41,10 +41,11 @@ function getWeek(date, off) {
 }
 
 function getRecordClass(value, trigger) {
-  if (value < Math.ceil(trigger / 3)) return "";
-  if (value < Math.ceil((trigger / 3) * 2)) return "warning";
-  if (value < trigger) return "danger";
-  return "fail";
+  if (value < Math.ceil(trigger / 3)) return "text-green-400 text-lg";
+  if (value < Math.ceil((trigger / 3) * 2))
+    return "text-yellow-500 font-bold text-xl";
+  if (value < trigger) return "text-red-400 font-bold text-2xl";
+  return "text-black text-2xl";
 }
 
 const WeekDay = ({ day, date, active, disabled, isOff }) => {
@@ -98,7 +99,7 @@ const WeekBar = ({ calendar }) => {
 
 const NotificationsCard = ({ news, openDialog, updateDialog }) => {
   const TWO_WEEKS = 2 * 7 * 24 * 60 * 60 * 1000;
-  news = news.filter((n) => new Date() - new Date(n.date) <= TWO_WEEKS);
+  // news = news.filter((n) => new Date() - new Date(n.date) <= TWO_WEEKS);
 
   const senderMapper = (sender) =>
     sender.replace(/(校務顧問|校監|校長|副校長|校助|主任|老師|同學)/g, " $1");
@@ -121,12 +122,12 @@ const NotificationsCard = ({ news, openDialog, updateDialog }) => {
   };
 
   return (
-    <div className="news-card bg-light text-secondary px-4">
+    <div className="news-card bg-light text-secondary px-4 py-3">
       <h2>
-        <img src={notificationIcon} alt="" className="icon-left" />
+        <img src={notificationIcon} alt="Bell" className="icon-left" />
         校園通知
       </h2>
-      <ul className="notf-list bg-white w-full border-2 border-browny">
+      <ul className="notf-list bg-white w-full border-2 border-browny my-2">
         {news.length ? (
           news.map((n) => (
             <li key={n.id} onClick={readNotf(n.id)}>
@@ -138,11 +139,11 @@ const NotificationsCard = ({ news, openDialog, updateDialog }) => {
           ))
         ) : (
           <li>
-            <h3>暫無最新通知</h3>
+            <h3 className="text-primary font-semibold">暫無最新通知</h3>
           </li>
         )}
       </ul>
-      <div className="actions">
+      <div className="flex justify-end">
         <Link to="../news">更多...</Link>
       </div>
     </div>
@@ -153,16 +154,20 @@ const RecordMeter = ({ quota }) => {
   const record = quota?.record || [];
 
   return (
-    <div className="record-meter news-card">
+    <div className="news-card bg-info text-white">
       <h2>
         <img src={recordIcon} alt="Record" className="icon-left" />
         日常表現
       </h2>
-      <table>
+      <table className="border-2 border-info bg-white text-black rounded border-collapse mx-2">
         <thead>
           <tr>
             {record.map((r) => (
-              <th scope="col" key={r.type}>
+              <th
+                scope="col"
+                key={r.type}
+                className="border-2 border-secondary px-2 py-1"
+              >
                 {r.type}
               </th>
             ))}
@@ -171,14 +176,23 @@ const RecordMeter = ({ quota }) => {
         <tbody>
           <tr>
             {record.map((r) => (
-              <td key={r.type} className={getRecordClass(r.value, r.quota)}>
+              <td
+                key={r.type}
+                className={
+                  "border-2 border-secondary px-2 py-1 " +
+                  getRecordClass(r.value, r.quota)
+                }
+              >
                 {r.value}
+                <span className="text-xs ml-1 text-browny">次</span>
               </td>
             ))}
           </tr>
         </tbody>
       </table>
-      <h3>第 {quota.curTerm ? quota.curTerm + 1 : "-"} 學段</h3>
+      <h3 className="text-center p-2 text-xl">
+        第 {quota.curTerm ? quota.curTerm + 1 : "-"} 學段
+      </h3>
     </div>
   );
 };

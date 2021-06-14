@@ -10,6 +10,16 @@ module.exports = {
         info: "#7596ff",
         browny: "#847577",
       },
+      minHeight: {
+        "1/4": "25%",
+        "1/2": "50%",
+        "3/4": "75%",
+      },
+      maxHeight: {
+        "1/4": "25%",
+        "1/2": "50%",
+        "3/4": "75%",
+      },
     },
   },
   variants: {
@@ -19,6 +29,7 @@ module.exports = {
       borderWidth: ["disabled", "last"],
       borderColor: ["disabled"],
       cursor: ["disabled"],
+      opacity: ["active"],
     },
   },
   plugins: [],
