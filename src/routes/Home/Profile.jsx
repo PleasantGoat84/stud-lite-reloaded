@@ -59,7 +59,7 @@ const UserCard = ({ avatar, display, gender, id }) => {
 
 const Profile = ({ user }) => {
   return (
-    <div className="-mt-4">
+    <div className="-mt-6">
       <UserCard
         avatar={avatarImg}
         display={user?.display}
