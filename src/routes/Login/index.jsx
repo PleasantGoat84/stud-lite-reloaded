@@ -20,7 +20,7 @@ const Login = ({ user, setUser, loggedIn, setLoggedIn }) => {
 
   return (
     <div className="flex flex-col flex-grow items-center justify-center pb-16">
-      <div className="flex flex-col items-center w-80 bg-white p-4 rounded-md shadow-md pb-20">
+      <div className="flex flex-col items-center w-80 bg-white p-5 rounded-md shadow-md pb-20">
         <h1 className="text-2xl font-medium mb-4">進入 StudLite</h1>
         <h2>使用以下方式</h2>
         <div className="flex flex-col flex-grow my-12 items-stretch w-64">
